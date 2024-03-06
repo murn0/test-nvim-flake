@@ -48,7 +48,7 @@
             });
           };
 
-          neovim-with-plugins = pkgs.wrapNeovimUnstable neovim-unwrapped (
+          neovim-with-plugins = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (
             (pkgs.neovimUtils.makeNeovimConfig {
                 withPython3 = false;
                 withNodeJs = true;
