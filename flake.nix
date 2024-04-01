@@ -12,7 +12,8 @@
       
       imports = [
         inputs.flake-parts.flakeModules.easyOverlay
-        ./modules
+        # ./modules
+        ./modules2
       ];
 
       # flake = {
@@ -24,13 +25,19 @@
       perSystem = { config, pkgs, ... }: {
 
         packages = {
-          default = config.packages.stable;
-          stable = config.neovim.stable;
-          nightly = config.neovim.nightly;
+          default = config.packages.final;
+          final = config.neovim.final;
         };
 
         overlayAttrs = {
-          inherit (config.packages) stable nightly;
+          inherit (config.packages) default final;
+        };
+
+        devShells.default = pkgs.mkShell {
+          name = "neovim.nix";
+          packages = [
+            config.neovim.final
+          ];
         };
 
       };
